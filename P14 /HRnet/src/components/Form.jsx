@@ -24,6 +24,7 @@ const Form = () => {
     const street = document.getElementById('street').value;
     const city = document.getElementById('city').value;
     const zipCode = document.getElementById('zip-code').value;
+    const departement = document.getElementById('departement').value;
 
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const employee = {
@@ -31,6 +32,7 @@ const Form = () => {
       lastName,
       dateOfBirth: dateOfBirth.toLocaleDateString(),
       startDate: startDate.toLocaleDateString(),
+      departement,
       street,
       city,
       state: selectedState.value,
