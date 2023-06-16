@@ -4,11 +4,19 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
+import Modal from './Modal';
+import { useDispatch } from 'react-redux';
+import { addEmployee } from '../store/actions/employeeActions';
+
+
 
 const Form = () => {
   const [selectedState, setSelectedState] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     const statesOptions = states.map(state => ({
@@ -18,29 +26,41 @@ const Form = () => {
     setStatesOptions(statesOptions);
   }, []);
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  
+
   const saveEmployee = () => {
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
     const street = document.getElementById('street').value;
     const city = document.getElementById('city').value;
     const zipCode = document.getElementById('zip-code').value;
-    const departement = document.getElementById('departement').value;
+    const department = document.getElementById('department').value;
 
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    //const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const employee = {
       firstName,
       lastName,
       dateOfBirth: dateOfBirth.toLocaleDateString(),
       startDate: startDate.toLocaleDateString(),
-      departement,
+      department,
       street,
       city,
       state: selectedState.value,
       zipCode
     };
 
-    employees.push(employee);
-    localStorage.setItem('employees', JSON.stringify(employees));
+    //employees.push(employee);
+    //localStorage.setItem('employees', JSON.stringify(employees));
+    dispatch(addEmployee(employee));
+
+    openModal();
 
 
     // Reset form fields
@@ -296,6 +316,7 @@ const Form = () => {
   const [statesOptions, setStatesOptions] = useState([]);
 
   return (
+    <>
     <div className="form-container">
     <Link to="/list" className="btn btn-primary">Employees List</Link>
       <h1>Create Employee</h1>
@@ -329,8 +350,8 @@ const Form = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="department">Department</label>
-          <input type="text" id="department" className="form-control" />
+            <label htmlFor="department">Department</label>
+            <input type="text" id="department" className="form-control" />
         </div>
         <div className="form-group">
           <label htmlFor="street">Street</label>
@@ -365,6 +386,9 @@ const Form = () => {
         </button>
       </form>
     </div>
+    {isModalOpen && <Modal closeModal={closeModal} />}
+    </>
+
   );
 };
 

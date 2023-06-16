@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const EmployeeList = () => {
-  const [employees, setEmployees] = useState([]);
+  //const [employees, setEmployees] = useState([]);
+  const employees = useSelector((state) => state.employees);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    const storedEmployees = localStorage.getItem('employees');
-    if (storedEmployees) {
-      const parsedEmployees = JSON.parse(storedEmployees);
-      setEmployees(parsedEmployees);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedEmployees = localStorage.getItem('employees');
+  //   if (storedEmployees) {
+  //     const parsedEmployees = JSON.parse(storedEmployees);
+  //     setEmployees(parsedEmployees);
+  //   }
+  // }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -31,15 +33,15 @@ const EmployeeList = () => {
   };
 
   const columns = [
-    { name: 'First Name', selector: 'firstName', sortable: true },
-    { name: 'Last Name', selector: 'lastName', sortable: true },
-    { name: 'Start Date', selector: 'startDate', sortable: true },
-    { name: 'Department', selector: 'departement', sortable: true },
-    { name: 'Date of Birth', selector: 'dateOfBirth', sortable: true },
-    { name: 'Street', selector: 'street', sortable: true },
-    { name: 'City', selector: 'city', sortable: true },
-    { name: 'State', selector: 'state' , sortable: true},
-    { name: 'Zip Code', selector: 'zipCode', sortable: true },
+    { name: 'First Name', selector: (row) => row.firstName, sortable: true },
+    { name: 'Last Name', selector: (row) => row.lastName, sortable: true },
+    { name: 'Start Date', selector: (row) => row.startDate, sortable: true },
+    { name: 'Department', selector: (row) => row.department, sortable: true },
+    { name: 'Date of Birth', selector: (row) => row.dateOfBirth, sortable: true },
+    { name: 'Street', selector: (row) => row.street, sortable: true },
+    { name: 'City', selector: (row) => row.city, sortable: true },
+    { name: 'State', selector: (row) => row.state, sortable: true },
+    { name: 'Zip Code', selector: (row) => row.zipCode, sortable: true },
   ];
 
   return (
