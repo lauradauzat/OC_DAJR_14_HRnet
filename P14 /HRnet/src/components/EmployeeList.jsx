@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import mockDataEmployees from '../mockDataEmployees.json';
 
 const EmployeeList = () => {
-  //const [employees, setEmployees] = useState([]);
-  const employees = useSelector((state) => state.employees);
+  const reduxEmployees = useSelector((state) => state.employees);
+  const employees = [...mockDataEmployees, ...reduxEmployees];
+  console.log(employees)
   const [searchTerm, setSearchTerm] = useState('');
 
   // useEffect(() => {
@@ -25,12 +27,16 @@ const EmployeeList = () => {
       return employees;
     }
     const term = searchTerm.toLowerCase();
-    return employees.filter(
-      (employee) =>
-        employee.firstName.toLowerCase().includes(term) ||
-        employee.lastName.toLowerCase().includes(term)
-    );
+    return employees.filter((employee) => {
+      const employeeData = Object.values(employee).map((value) =>
+        typeof value === 'string' ? value.toLowerCase() : ''
+      );
+      return employeeData.some((data) => data.includes(term));
+    });
   };
+
+
+  const customPaginationOptionsPerPage = [10, 25, 50, 100];
 
   const columns = [
     { name: 'First Name', selector: (row) => row.firstName, sortable: true },
@@ -56,7 +62,13 @@ const EmployeeList = () => {
         />
       </div>
       {employees.length > 0 ? (
-        <DataTable columns={columns} data={filteredData()} pagination responsive />
+        <DataTable 
+        columns={columns} 
+        data={filteredData()} 
+        pagination 
+        responsive 
+        paginationRowsPerPageOptions={customPaginationOptionsPerPage} 
+        />
       ) : (
         <span>No employees</span>
       )}

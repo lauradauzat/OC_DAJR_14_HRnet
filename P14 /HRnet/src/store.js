@@ -18,6 +18,7 @@ const store = configureStore({
     reducer: {
         employees: employeesSlice.reducer,
     },
+    devTools: true, // Enable Redux DevTools extension
 });
 
 

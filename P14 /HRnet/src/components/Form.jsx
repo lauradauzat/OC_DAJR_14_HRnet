@@ -6,7 +6,7 @@ import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
 import Modal from './Modal';
 import { useDispatch } from 'react-redux';
-import { addEmployee } from '../store/actions/employeeActions';
+//import { addEmployee } from '../store/actions/employeeActions';
 
 
 
@@ -58,7 +58,9 @@ const Form = () => {
 
     //employees.push(employee);
     //localStorage.setItem('employees', JSON.stringify(employees));
-    dispatch(addEmployee(employee));
+    console.log(employee);
+    dispatch({ type: 'employees/addEmployee', payload: employee });
+
 
     openModal();
 
@@ -364,18 +366,30 @@ const Form = () => {
         <div className="form-group">
           <label htmlFor="state">State</label>
           <Select
-           styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              backgroundColor:"#444;",
-            }),
-          }}
-            id="state"
-            className="form-control"
-            value={selectedState}
-            onChange={state => setSelectedState(state)}
-            options={statesOptions}
-          />
+  styles={{
+    control: (baseStyles, { isFocused }) => ({
+      ...baseStyles,
+      backgroundColor: '#444',
+      color: '#fff',
+      outline: isFocused ? 'none' : null
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#444' : 'transparent',
+      color: state.isSelected ? '#fff' : '#000'
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: '#fff'
+    })
+  }}
+  id="state"
+  className="form-control"
+  value={selectedState}
+  onChange={state => setSelectedState(state)}
+  options={statesOptions}
+/>
+
         </div>
         <div className="form-group">
           <label htmlFor="zip-code">Zip Code</label>
