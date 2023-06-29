@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
-//import { Modal } from 'simple-modal-hrnet';
+import  Modal from 'simple-modal-hrnet/dist/Modal';
 import statesjson from  '../states.json'
 import { useDispatch } from 'react-redux';
 //import { addEmployee } from '../store/actions/employeeActions';
@@ -169,7 +169,7 @@ const Form = () => {
       </form>
     </div>
     {/* {isModalOpen && <Modal closeModal={closeModal} />} */}
-    {/* <Modal /> */}
+    <Modal />
     </>
 
   );
