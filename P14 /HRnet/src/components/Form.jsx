@@ -4,10 +4,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import 'react-datepicker/dist/react-datepicker.css';
-import Modal from './Modal';
+//import { Modal } from 'simple-modal-hrnet';
 import statesjson from  '../states.json'
 import { useDispatch } from 'react-redux';
 //import { addEmployee } from '../store/actions/employeeActions';
+
+
+
 
 
 
@@ -15,7 +18,7 @@ const Form = () => {
   const [selectedState, setSelectedState] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  //const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
 
@@ -27,13 +30,13 @@ const Form = () => {
     setStatesOptions(statesOptions);
   }, []);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
   
 
   const saveEmployee = () => {
@@ -63,7 +66,7 @@ const Form = () => {
     dispatch({ type: 'employees/addEmployee', payload: employee });
 
 
-    openModal();
+    
 
 
     // Reset form fields
@@ -165,7 +168,8 @@ const Form = () => {
         </button>
       </form>
     </div>
-    {isModalOpen && <Modal closeModal={closeModal} />}
+    {/* {isModalOpen && <Modal closeModal={closeModal} />} */}
+    {/* <Modal /> */}
     </>
 
   );

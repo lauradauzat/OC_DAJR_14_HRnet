@@ -61,7 +61,7 @@ button {
   float: right;
 }
 
-.modal {
+/* .modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -88,7 +88,7 @@ button {
   right: 10px;
   font-size: 20px;
   cursor: pointer;
-}
+} */
 
 
 /*fix arrow on row per pages options */ 
