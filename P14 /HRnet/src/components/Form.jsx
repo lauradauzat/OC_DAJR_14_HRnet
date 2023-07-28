@@ -12,15 +12,17 @@ import { useDispatch } from 'react-redux';
 
 
 
-
-
 const Form = () => {
   const [selectedState, setSelectedState] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [dateOfBirth, setDateOfBirth] = useState(null);
-  //const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+    // Function to close the modal
+    const handleCloseModal = () => {
+      setIsModalVisible(false);
+    };
 
   useEffect(() => {
     const statesOptions = states.map(state => ({
@@ -30,13 +32,6 @@ const Form = () => {
     setStatesOptions(statesOptions);
   }, []);
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
   
 
   const saveEmployee = () => {
@@ -63,11 +58,10 @@ const Form = () => {
     //employees.push(employee);
     //localStorage.setItem('employees', JSON.stringify(employees));
     console.log(employee);
+    setIsModalVisible(true); // Show the modal on successful form submission
     dispatch({ type: 'employees/addEmployee', payload: employee });
 
-
-    
-
+   
 
     // Reset form fields
     document.getElementById('first-name').value = '';
@@ -169,7 +163,7 @@ const Form = () => {
       </form>
     </div>
     {/* {isModalOpen && <Modal closeModal={closeModal} />} */}
-    <Modal />
+    <Modal visible={isModalVisible} onClose={handleCloseModal} />
     </>
 
   );
