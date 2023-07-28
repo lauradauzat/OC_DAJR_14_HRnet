@@ -1,3 +1,9 @@
+/**
+ * Renders the employee list component using React components.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 import { useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
@@ -5,23 +11,26 @@ import { useSelector } from 'react-redux';
 import mockDataEmployees from '../mockDataEmployees.json';
 
 const EmployeeList = () => {
+   /**
+   * Represents the search term used for filtering employees.
+   * @typedef {string} SearchTerm
+   */
   const reduxEmployees = useSelector((state) => state.employees);
   const employees = [...mockDataEmployees, ...reduxEmployees];
   console.log(employees)
   const [searchTerm, setSearchTerm] = useState('');
 
-  // useEffect(() => {
-  //   const storedEmployees = localStorage.getItem('employees');
-  //   if (storedEmployees) {
-  //     const parsedEmployees = JSON.parse(storedEmployees);
-  //     setEmployees(parsedEmployees);
-  //   }
-  // }, []);
-
+  
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
+    /**
+   * Filters the employees based on the current search term.
+   *
+   * @function
+   * @returns {Array<Object>} An array of filtered employee objects.
+   */
   const filteredData = () => {
     if (searchTerm === '') {
       return employees;

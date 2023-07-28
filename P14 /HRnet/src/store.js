@@ -1,4 +1,7 @@
-
+/**
+ * @fileoverview Redux store configuration for managing employees state.
+ * @module store
+ */
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const employeesSlice = createSlice({

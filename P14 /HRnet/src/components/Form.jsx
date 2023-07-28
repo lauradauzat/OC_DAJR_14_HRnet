@@ -1,3 +1,9 @@
+/**
+ * Renders the form to create an employee using React components.
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 import { useState , useEffect} from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,7 +13,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import  Modal from 'simple-modal-hrnet/dist/Modal';
 import statesjson from  '../states.json'
 import { useDispatch } from 'react-redux';
-//import { addEmployee } from '../store/actions/employeeActions';
 
 
 
@@ -41,8 +46,6 @@ const Form = () => {
     const city = document.getElementById('city').value;
     const zipCode = document.getElementById('zip-code').value;
     const department = document.getElementById('department').value;
-
-    //const employees = JSON.parse(localStorage.getItem('employees')) || [];
     const employee = {
       firstName,
       lastName,
@@ -55,13 +58,9 @@ const Form = () => {
       zipCode
     };
 
-    //employees.push(employee);
-    //localStorage.setItem('employees', JSON.stringify(employees));
     console.log(employee);
     setIsModalVisible(true); // Show the modal on successful form submission
     dispatch({ type: 'employees/addEmployee', payload: employee });
-
-   
 
     // Reset form fields
     document.getElementById('first-name').value = '';
@@ -162,7 +161,6 @@ const Form = () => {
         </button>
       </form>
     </div>
-    {/* {isModalOpen && <Modal closeModal={closeModal} />} */}
     <Modal visible={isModalVisible} onClose={handleCloseModal} />
     </>
 
