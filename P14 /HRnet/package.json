@@ -18,7 +18,7 @@
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.12.1",
     "react-select": "^5.7.3",
-    "simple-modal-hrnet": "^2.0.1",
+    "simple-modal-hrnet": "^2.1.0",
     "styled-components": "^6.0.5"
   },
   "devDependencies": {
